@@ -3,7 +3,7 @@ import View from './view';
 const subSubChild = new View({
 	template: `
 		<div>
-			<p>Subsubchild niveau 3 => {{sub}}</p>
+			<p>Subsubchild niveau 3 => {{sub}} {{tutu}}</p>
 			<input type="text" :model="sub"/>
 		</div>
 	`,
@@ -17,7 +17,7 @@ const subChild = new View({
 	template: `
 		<div>
 			<span>Subchild niveau 2</span>
-			<subsubchild></subsubchild>
+			<subsubchild tutu="{{titi}}"></subsubchild>
 		</div>
 	`,
 	tag: 'subchild',
@@ -30,13 +30,18 @@ const result = new View({
 	template: `<div>
     <h3>{{lol}}</h3>
     <input :model="lol" type="text" value="{{lol}}"/>
-    <subchild></subchild>
+    <button @click="clickOnMe">Let me see the parent props arguments !</button>
+    <subchild titi="{{toto}}"></subchild>
     </div>`,
 	tag: 'result',
 	data: {
 		lol: 'Let\s bangarang !'
 	},
-	methods: {},
+	methods: {
+		clickOnMe: function () {
+			alert(this.data.toto);
+		}
+	},
 	components: [
 		subChild
 	]
@@ -47,7 +52,7 @@ const view = new View({
     <h3>{{test}}</h3>
     <input :model="test" type="text" value="{{test}}"/>
     <button @click="callMeBaby">Click me !</button>
-    <result></result>
+    <result toto="{{test}}"></result>
     </div>`,
 	tag: 'my-view',
 	data: {
@@ -56,9 +61,6 @@ const view = new View({
 	methods: {
 		callMeBaby: function () {
 			alert(this.data.test);
-		},
-		changeOnHere: function (ev) {
-			console.log(this.currentNode);
 		}
 	},
 	components: [

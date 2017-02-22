@@ -8,17 +8,17 @@ class TemplateParser {
 		return this._compileToNode(currentNode, ast);
 	}
 
-	_resolveChildComponent(componentList, node) {
-		const presentInString = componentList.filter(component => {
+	_resolveChildComponent(parentComponent, node) {
+		const presentInString = parentComponent.components.filter(component => {
 			return node.tagName === component.tag;
 		});
 
 		const compiledElements = presentInString.map(component => {
+			component.data = Object.assign({}, component.data, node.attributes);
 			const compiledNode = this.compile(component, component.template, component.data);
 			component.currentNode = compiledNode;
 			return compiledNode;
 		});
-
 		return compiledElements.length === 1 ? compiledElements[0] : null;
 	}
 
@@ -33,7 +33,7 @@ class TemplateParser {
 
 	_computeChildTags(currentView, node) {
 		const props = node.attributes;
-		const childComponent = this._resolveChildComponent(currentView.components, node);
+		const childComponent = this._resolveChildComponent(currentView, node);
 		if (childComponent) {
 			return childComponent;
 		}
