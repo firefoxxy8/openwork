@@ -30,16 +30,20 @@ const result = new View({
 	template: `<div>
     <h3>{{lol}}</h3>
     <input :model="lol" type="text" value="{{lol}}"/>
-    <button @click="clickOnMe">Let me see the parent props arguments !</button>
+    <p :show="displayed">I m the mountain !</p>
+    <button @click="clickOnMe">Let see the moutain !</button>
     <subchild titi="{{toto}}"></subchild>
     </div>`,
 	tag: 'result',
 	data: {
-		lol: 'Let\s bangarang !'
+		lol: 'Let\s bangarang !',
+		displayed: false
 	},
 	methods: {
 		clickOnMe: function () {
-			alert(this.data.toto);
+			this.setState({
+				displayed: !this.data.displayed
+			});
 		}
 	},
 	components: [

@@ -33,16 +33,31 @@ class TemplateParser {
 
 	_computeChildTags(currentView, node) {
 		const props = node.attributes;
+		const events = this._handleEvents(currentView, props);
 		const childComponent = this._resolveChildComponent(currentView, node);
 		if (childComponent) {
 			return childComponent;
 		}
+		const styles = this._handleStyleModification(currentView, props);
+		const style = styles.style;
+		const classes = styles.classes;
 		if (node.children) {
 			const children = node.children.map(node => this._computeChildTags(currentView, node));
-			return h(node.tagName || node.type, {props, on: this._handleEvents(currentView, props)}, children);
+			return h(node.tagName || node.type, {style, props, on: events}, children);
 		}
-		const events = this._handleEvents(currentView, props);
-		return h(node.tagName || node.type, {props, on: events}, node.content);
+		return h(node.tagName || node.type, {style, props, on: events}, node.content);
+	}
+
+	_handleStyleModification(currentView, attributes = {}) {
+		const styles = {style: {}, classes: {}};
+		if (attributes[':show']) {
+			styles.style.display = currentView.data[attributes[':show']] ? 'block' : 'none';
+		}
+
+		if (attributes[':class']) {
+
+		}
+		return styles;
 	}
 
 	_handleEvents(currentView, attributes = {}) {
