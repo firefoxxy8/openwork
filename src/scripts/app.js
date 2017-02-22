@@ -1,17 +1,46 @@
 import View from './view';
 
-
-const result = new View({
-	tag: 'result',
-	template: `<div>
-		<h4>Result is {{here}}</h4>
-		<input :model="here" type="text" value="{{here}}"/>
-	</div>`,
+const subSubChild = new View({
+	template: `
+		<div>
+			<p>Subsubchild niveau 3 => {{sub}}</p>
+			<input type="text" :model="sub"/>
+		</div>
+	`,
+	tag: 'subsubchild',
 	data: {
-		here: 'here !'
+		sub: ''
 	}
 });
 
+const subChild = new View({
+	template: `
+		<div>
+			<span>Subchild niveau 2</span>
+			<subsubchild></subsubchild>
+		</div>
+	`,
+	tag: 'subchild',
+	components: [
+		subSubChild
+	]
+});
+
+const result = new View({
+	template: `<div>
+    <h3>{{lol}}</h3>
+    <input :model="lol" type="text" value="{{lol}}"/>
+    <subchild></subchild>
+    </div>`,
+	tag: 'result',
+	data: {
+		lol: 'Let\s bangarang !'
+	},
+	methods: {},
+	components: [
+		subChild
+	]
+});
 
 const view = new View({
 	template: `<div>
@@ -27,6 +56,9 @@ const view = new View({
 	methods: {
 		callMeBaby: function () {
 			alert(this.data.test);
+		},
+		changeOnHere: function (ev) {
+			console.log(this.currentNode);
 		}
 	},
 	components: [

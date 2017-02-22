@@ -1,7 +1,6 @@
 import himalaya from 'himalaya';
 import h from 'snabbdom/h';
-
-export default class TemplateParser {
+class TemplateParser {
 
 	compile(currentNode, htmlTemplate, data) {
 		const htmlInterpolated = this._interpolateString(htmlTemplate, data);
@@ -9,13 +8,15 @@ export default class TemplateParser {
 		return this._compileToNode(currentNode, ast);
 	}
 
-	_compileChildComponents(componentList, node) {
+	_resolveChildComponent(componentList, node) {
 		const presentInString = componentList.filter(component => {
 			return node.tagName === component.tag;
 		});
 
 		const compiledElements = presentInString.map(component => {
-			return this.compile(component, component.template, component.data);
+			const compiledNode = this.compile(component, component.template, component.data);
+			component.currentNode = compiledNode;
+			return compiledNode;
 		});
 
 		return compiledElements.length === 1 ? compiledElements[0] : null;
@@ -31,11 +32,11 @@ export default class TemplateParser {
 	}
 
 	_computeChildTags(currentView, node) {
-		const compiledNode = this._compileChildComponents(currentView.components, node);
-		if (compiledNode) {
-			return compiledNode;
-		}
 		const props = node.attributes;
+		const childComponent = this._resolveChildComponent(currentView.components, node);
+		if (childComponent) {
+			return childComponent;
+		}
 		if (node.children) {
 			const children = node.children.map(node => this._computeChildTags(currentView, node));
 			return h(node.tagName || node.type, {props, on: this._handleEvents(currentView, props)}, children);
@@ -60,3 +61,5 @@ export default class TemplateParser {
 		return on;
 	}
 }
+
+export default new TemplateParser();
