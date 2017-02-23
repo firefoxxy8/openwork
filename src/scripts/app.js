@@ -33,7 +33,7 @@ const root = new View({
 	methods: {
 		onLoadPokemon: function () {
 			this.setState({loading: true});
-			fetch('http://pokeapi.co/api/v2/pokemon/' + this.data.pokemonName)
+			fetch('https://pokeapi.co/api/v2/pokemon/' + this.data.pokemonName)
 				.then(res => res.json())
 				.then(pokemon => {
 					this.setState({
