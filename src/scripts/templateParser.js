@@ -16,7 +16,7 @@ class TemplateParser {
 		const compiledElements = presentInString.map(component => {
 			const parentProps = {};
 			for (let key in parentComponent.data) {
-				for(let k in node.attributes) {
+				for (let k in node.attributes) {
 					if (node.attributes[k] === key) {
 						parentProps[key] = parentComponent.data[key];
 					}
