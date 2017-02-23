@@ -1,5 +1,71 @@
-$body-color: blue;
+$body-color: #4A4A4A;
+$border: #dddddd;
+$body-bg: #f4F4F4;
+$clear: #ffffff;
 
 body {
-  color: $body-color;
-}  
+	font-family: Roboto;
+	color: $body-color;
+	background-color: $body-bg;
+}
+
+.primary {
+	color: #3F51B5;
+}
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+
+img {
+	width: 300px;
+	height: 300px;
+}
+
+input[type=text] {
+	height: 25px;
+	line-height: 25px;
+	padding: 0px 10px;
+	border-radius: 3px;
+	border: 1px solid $border;
+	width: 100%;
+	display: block;
+}
+
+button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	&:hover {
+		opacity: 0.8;
+	}
+	cursor: pointer;
+	outline: none;
+	background-color: #3F51B5;
+	color: $clear;
+	border: none;
+	width: 150px;
+	text-transform: uppercase;
+	border-radius: 3px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.card {
+	text-align: center;
+	padding: 20px;
+	width: 100%;
+	background-color: $clear;
+	border: 1px solid $border;
+	border-radius: 3px;
+}
+
+.subchild {
+	background-color: #cccccc;
+	padding: 10px;
+}
+
+.subsubchild {
+	background-color: #bbbbbb;
+	padding: 10px;
+}

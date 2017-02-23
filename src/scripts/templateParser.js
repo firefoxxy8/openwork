@@ -14,7 +14,15 @@ class TemplateParser {
 		});
 
 		const compiledElements = presentInString.map(component => {
-			component.data = Object.assign({}, component.data, node.attributes);
+			const parentProps = {};
+			for (let key in parentComponent.data) {
+				for(let k in node.attributes) {
+					if (node.attributes[k] === key) {
+						parentProps[key] = parentComponent.data[key];
+					}
+				}
+			}
+			component.data = Object.assign({}, component.data, node.attributes, parentProps);
 			const compiledNode = this.compile(component, component.template, component.data);
 			component.currentNode = compiledNode;
 			return compiledNode;
@@ -40,7 +48,6 @@ class TemplateParser {
 		}
 		const styles = this._handleStyleModification(currentView, props);
 		const style = styles.style;
-		const classes = styles.classes;
 		if (node.children) {
 			const children = node.children.map(node => this._computeChildTags(currentView, node));
 			return h(node.tagName || node.type, {style, props, on: events}, children);
@@ -52,10 +59,6 @@ class TemplateParser {
 		const styles = {style: {}, classes: {}};
 		if (attributes[':show']) {
 			styles.style.display = currentView.data[attributes[':show']] ? 'block' : 'none';
-		}
-
-		if (attributes[':class']) {
-
 		}
 		return styles;
 	}

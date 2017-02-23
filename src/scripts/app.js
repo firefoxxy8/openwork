@@ -1,73 +1,52 @@
 import View from './view';
+import Child from './components/child';
+import Subsubchild from './components/subSubChild';
 
-const subSubChild = new View({
+const toString = array => {
+	return array.map(item => {
+		return `Ability : ${item.ability.name} / Slots : ${item.slot}`;
+	}).toString();
+};
+
+const root = new View({
 	template: `
-		<div>
-			<p>Subsubchild niveau 3 => {{sub}} {{tutu}}</p>
-			<input type="text" :model="sub"/>
+	<div class="container">
+	    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
+	    <input :model="pokemonName" type="text" value="{{pokemonName}}"/>
+	    <button @click="onLoadPokemon">Load the pokemon !</button>
+	    <div :show="loading">
+	        Loading...
 		</div>
-	`,
-	tag: 'subsubchild',
-	data: {
-		sub: ''
-	}
-});
-
-const subChild = new View({
-	template: `
-		<div>
-			<span>Subchild niveau 2</span>
-			<subsubchild tutu="{{titi}}"></subsubchild>
-		</div>
-	`,
-	tag: 'subchild',
-	components: [
-		subSubChild
-	]
-});
-
-const result = new View({
-	template: `<div>
-    <h3>{{lol}}</h3>
-    <input :model="lol" type="text" value="{{lol}}"/>
-    <p :show="displayed">I m the mountain !</p>
-    <button @click="clickOnMe">Let see the moutain !</button>
-    <subchild titi="{{toto}}"></subchild>
-    </div>`,
-	tag: 'result',
-	data: {
-		lol: 'Let\s bangarang !',
-		displayed: false
-	},
-	methods: {
-		clickOnMe: function () {
-			this.setState({
-				displayed: !this.data.displayed
-			});
-		}
-	},
-	components: [
-		subChild
-	]
-});
-
-const view = new View({
-	template: `<div>
-    <h3>{{test}}</h3>
-    <input :model="test" type="text" value="{{test}}"/>
-    <button @click="callMeBaby">Click me !</button>
-    <result toto="{{test}}"></result>
+		<div :show="image">
+	    	<pokemon-card image="{{image}}" abilities="{{abilities}}"></pokemon-card>
+	    </div>
     </div>`,
 	tag: 'my-view',
 	data: {
-		test: 'Let\s test !'
+		pokemonName: '',
+		image: null,
+		loading: false,
+		abilities: {
+			plouf: 'paf'
+		}
 	},
 	methods: {
-		callMeBaby: function () {
-			alert(this.data.test);
+		onLoadPokemon: function () {
+			this.setState({loading: true});
+			fetch('http://pokeapi.co/api/v2/pokemon/' + this.data.pokemonName)
+				.then(res => res.json())
+				.then(pokemon => {
+					this.setState({
+						loading: false,
+						image: pokemon.sprites.front_default,
+						abilities: toString(pokemon.abilities)
+					});
+				});
 		}
 	},
 	components: [
-		result
+		Child,
+		Subsubchild
 	]
-}).mount('application');
+});
+root.mount('application');
