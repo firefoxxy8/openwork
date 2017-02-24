@@ -25,12 +25,8 @@ body {
 	color: $primary;
 }
 
-.col {
-	flex: 1;
-	padding: 20px;
-}
 .container {
-	display: flex;
+	width: 960px;
 	margin: 0 auto;
 }
 
@@ -45,16 +41,15 @@ input[type=text] {
 	padding: 0px 10px;
 	border-radius: 3px;
 	border: 1px solid $border;
-	width: 70%;
+	width: 940px;
 	display: block;
 }
 
 button {
-	float: right;
 	&:hover {
 		opacity: 0.8;
 	}
-	margin-top: -3px;
+	margin-top: 10px;
 	cursor: pointer;
 	outline: none;
 	background-color: $primary;
@@ -92,4 +87,13 @@ button {
 
 .global-padding {
 	padding: 20px;
+}
+
+p {
+	font-size: 0.7em;
+}
+
+.code {
+	background-color: #efefef;
+	padding: 5px;
 }

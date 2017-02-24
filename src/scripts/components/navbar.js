@@ -1,4 +1,4 @@
-import View from './../view';
+import View from '../lib/view';
 
 export default new View({
 	template: `

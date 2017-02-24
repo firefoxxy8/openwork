@@ -1,5 +1,5 @@
-import {patch} from './vDom';
-import templateParser from './templateParser';
+import {patch} from '../vDom';
+import templateCompiler from './templateCompiler';
 
 export default class View {
 
@@ -23,9 +23,8 @@ export default class View {
 	}
 
 	_updateNode(oldNode) {
-		const node = templateParser.compile(this, this.template, this.data);
+		const node = templateCompiler.compile(this, this.template, this.data);
 		this.currentNode = node;
 		patch(oldNode, this.currentNode);
-		return this;
 	}
 }

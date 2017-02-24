@@ -1,4 +1,4 @@
-import View from './../view';
+import View from '../lib/view';
 import Subsubchild from './subSubChild';
 
 export default new View({
