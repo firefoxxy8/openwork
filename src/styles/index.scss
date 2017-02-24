@@ -3,7 +3,6 @@ $border: #dddddd;
 $body-bg: #f4F4F4;
 $clear: #ffffff;
 $primary: #3F51B5;
-
 body {
 	font-family: Roboto;
 	color: $body-color;
@@ -17,8 +16,8 @@ body {
 	height: 50px;
 	line-height: 50px;
 	background-color: $primary;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 40px;
+	padding-right: 40px;
 	color: $clear;
 }
 
@@ -26,14 +25,18 @@ body {
 	color: $primary;
 }
 
+.col {
+	flex: 1;
+	padding: 20px;
+}
 .container {
-	width: 800px;
+	display: flex;
 	margin: 0 auto;
 }
 
 img {
-	width: 300px;
-	height: 300px;
+	width: 100px;
+	height: 100px;
 }
 
 input[type=text] {
@@ -42,16 +45,16 @@ input[type=text] {
 	padding: 0px 10px;
 	border-radius: 3px;
 	border: 1px solid $border;
-	width: 100%;
+	width: 70%;
 	display: block;
 }
 
 button {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	float: right;
 	&:hover {
 		opacity: 0.8;
 	}
+	margin-top: -3px;
 	cursor: pointer;
 	outline: none;
 	background-color: $primary;
@@ -64,13 +67,17 @@ button {
 	line-height: 30px;
 }
 
+.m-t {
+	margin-top: 10px;
+}
+
 .card {
-	text-align: center;
-	padding: 20px;
 	width: 100%;
 	background-color: $clear;
 	border: 1px solid $border;
 	border-radius: 3px;
+	overflow: auto;
+	word-wrap: break-word;
 }
 
 .subchild {
@@ -81,4 +88,8 @@ button {
 .subsubchild {
 	background-color: #bbbbbb;
 	padding: 10px;
+}
+
+.global-padding {
+	padding: 20px;
 }

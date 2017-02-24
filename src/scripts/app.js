@@ -2,6 +2,7 @@ import View from './view';
 import Child from './components/child';
 import Subsubchild from './components/subSubChild';
 import Navbar from './components/navbar';
+import Presentation from './components/presentation';
 
 const toString = array => {
 	return array.map(item => {
@@ -14,18 +15,24 @@ const root = new View({
 	<div>
 		<navbar></navbar>
 		<div class="container">
-			
-		    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
-		    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
-		    <button @click="onLoadPokemon">Load the pokemon !</button>
-		    <div :show="loading">
-		        Loading...
+			<div class="col">
+				<presentation></presentation>
 			</div>
-			<div :show="image">
-		        <pokemon-card image="{{image}}" abilities="{{abilities}}"></pokemon-card>
-		    </div>
-		    <div :show="error">
-		        {{error}}
+			<div class="col">
+			    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
+			    <button @click="onLoadPokemon">Load the pokemon !</button>
+			    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
+			    <div class="m-t">
+				    <div :show="loading">
+				        Loading...
+					</div>
+					<div :show="image">
+				        <pokemon-card image="{{image}}" abilities="{{abilities}}"></pokemon-card>
+				    </div>
+				    <div :show="error">
+				        {{error}}
+					</div>
+				</div>
 			</div>
 		</div>
     </div>`,
@@ -65,7 +72,8 @@ const root = new View({
 	components: [
 		Child,
 		Subsubchild,
-		Navbar
+		Navbar,
+		Presentation
 	]
 });
 root.mount('application');

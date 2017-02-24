@@ -4,11 +4,13 @@ import Subchild from './subChild';
 export default new View({
 	template: `
 		<div class="card">
-		    <img src="{{image}}"/>
-		    <p>
-		        {{abilities}}
-			</p>
-		    <subchild image="{{image}}"></subchild>
+			<div class="global-padding">
+			    <img src="{{image}}"/>
+			    <p>
+			        {{abilities}}
+				</p>
+			    <subchild image="{{image}}"></subchild>
+		    </div>
 	    </div>
 	`,
 	tag: 'pokemon-card',
