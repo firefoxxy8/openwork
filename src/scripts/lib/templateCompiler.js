@@ -3,7 +3,7 @@ import EventFactory from './eventFactory';
 import StyleFactory from './styleFactory';
 import DirectiveHandler from './directiveHandler';
 import interpolate from './interpolate';
-import h from 'snabbdom/h';
+import CompiledNode from './compiledNode';
 
 class TemplateCompiler {
 
@@ -19,7 +19,7 @@ class TemplateCompiler {
 
 	_compileToNode(currentView, astTree) {
 		const vNodes = astTree.map(node => this._computeChildTags(currentView, node));
-		return h(currentView.tag, {}, vNodes);
+		return new CompiledNode({tagName: currentView.tag}, {}, {}, {}, vNodes).display();
 	}
 
 	_computeChildTags(currentView, astNode) {

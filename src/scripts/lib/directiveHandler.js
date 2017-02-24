@@ -3,9 +3,10 @@ import CompiledNode from './compiledNode';
 
 export default class DirectiveHandler {
 	handle(currentView, astNode, events = {}, style = {}, props = {}, children = []) {
+		let compiledNode = new CompiledNode(astNode, events, style, props, children);
 		if (props[':if']) {
-			return new DirectiveIf().apply(currentView, astNode, events, style, props, children);
+			compiledNode = new DirectiveIf().apply(currentView, astNode, events, style, props, children);
 		}
-		return new CompiledNode(astNode, events, style, props, children).display();
+		return compiledNode.display();
 	}
 }
