@@ -19,7 +19,7 @@ class TemplateCompiler {
 
 	_compileToNode(currentView, astTree) {
 		const vNodes = astTree.map(node => this._computeChildTags(currentView, node));
-		return new CompiledNode({tagName: currentView.tag}, {}, {}, {}, vNodes).display();
+		return new CompiledNode(currentView, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
 	}
 
 	_computeChildTags(currentView, astNode) {
