@@ -33,7 +33,7 @@ class TemplateCompiler {
 
 		if (astNode.children) {
 			const children = astNode.children.map(node => this._computeChildTags(currentView, node));
-			return h(astNode.tagName || astNode.type, {style, props, on: events}, children);
+			return this.directiveHandler.handle(astNode, events, style,  props, children);
 		}
 		return this.directiveHandler.handle(astNode, events, style,  props);
 	}
