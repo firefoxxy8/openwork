@@ -33,9 +33,9 @@ class TemplateCompiler {
 
 		if (astNode.children) {
 			const children = astNode.children.map(node => this._computeChildTags(currentView, node));
-			return this.directiveHandler.handle(astNode, events, style,  props, children);
+			return this.directiveHandler.handle(currentView, astNode, events, style,  props, children);
 		}
-		return this.directiveHandler.handle(astNode, events, style,  props);
+		return this.directiveHandler.handle(currentView, astNode, events, style,  props);
 	}
 
 	_resolveChildComponent(parentComponent, node) {

@@ -15,6 +15,8 @@ const root = new View({
 		<navbar></navbar>
 		<div class="container">
 		    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
+		    <div :if="isIf">Something !</div>
+		    <button @click="ifHandler">Show something</button>
 		    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
 		    <button @click="onLoadPokemon">Load the pokemon !</button>
 		    <div class="m-t">
@@ -40,6 +42,11 @@ const root = new View({
 		}
 	},
 	methods: {
+		ifHandler: function() {
+			this.setState({
+				isIf: !this.data.isIf
+			});
+		},
 		onLoadPokemon: function () {
 			this.setState({loading: true, error: null});
 			fetch('https://pokeapi.co/api/v2/pokemon/' + this.data.pokemonName.toLowerCase())
