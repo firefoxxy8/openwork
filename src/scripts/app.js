@@ -17,7 +17,9 @@ const root = new View({
 		    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
 		    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
 		    <button @click="onLoadPokemon">Load the pokemon !</button>
+		    <p>{{test.key}}</p>
 		    <div class="m-t">
+		    	<div :for="a of arr">{{a.name}}</div>
 			    <div :if="loading">
 			        Loading...
 				</div>
@@ -33,11 +35,13 @@ const root = new View({
 	tag: 'my-view',
 	data: {
 		pokemonName: '',
+		test: {key: 'value'},
 		image: null,
 		loading: false,
 		abilities: {
 			plouf: 'paf'
-		}
+		},
+		arr : [{name: 'toto'}, {name: 'tata'}]
 	},
 	methods: {
 		onLoadPokemon: function () {

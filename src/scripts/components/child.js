@@ -14,7 +14,8 @@ export default new View({
 	    </div>
 	`,
 	tag: 'pokemon-card',
-	data: {},
+	data: {
+	},
 	methods: {},
 	components: [
 		Subchild

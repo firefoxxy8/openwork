@@ -1,4 +1,4 @@
-import {patch} from '../vDom';
+import {patch} from './vDom';
 import templateCompiler from './templateCompiler';
 
 export default class View {
