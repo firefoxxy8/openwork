@@ -19,7 +19,12 @@ const root = new View({
 		    <button @click="onLoadPokemon">Load the pokemon !</button>
 		    <p>{{test.key.dragon}}</p>
 		    <div class="m-t">
-		    	<div :for="a of arr"></div>
+		    	<div :for="a of arr">
+		    		<div>
+			            <h2>azerry</h2>
+			            <p>Plouf</p>
+		    		</div>
+				</div>
 			    <div :if="loading">
 			        Loading...
 				</div>
@@ -41,7 +46,7 @@ const root = new View({
 		abilities: {
 			plouf: 'paf'
 		},
-		arr : [{name: 'toto'}, {name: 'tata'}]
+		arr : [{name: 'toto'}, {name: 'tata'}, {name: 'titi'}]
 	},
 	methods: {
 		onLoadPokemon: function () {
