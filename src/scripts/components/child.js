@@ -9,6 +9,7 @@ export default new View({
 			    <p>
 			        {{abilities}}
 				</p>
+				<button @click="showAbilitied">Abilities</button>
 			    <subchild image="{{image}}"></subchild>
 		    </div>
 	    </div>
@@ -16,7 +17,11 @@ export default new View({
 	tag: 'pokemon-card',
 	data: {
 	},
-	methods: {},
+	methods: {
+		showAbilitied: function() {
+			console.log(this.data.abilities);
+		}
+	},
 	components: [
 		Subchild
 	]

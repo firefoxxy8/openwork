@@ -17,14 +17,14 @@ const root = new View({
 		    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
 		    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
 		    <button @click="onLoadPokemon">Load the pokemon !</button>
-		    <p>{{test.key}}</p>
+		    <p>{{test.key.dragon}}</p>
 		    <div class="m-t">
-		    	<div :for="a of arr">{{a.name}}</div>
+		    	<div :for="a of arr"></div>
 			    <div :if="loading">
 			        Loading...
 				</div>
 				<div :if="image">
-			        <pokemon-card image="{{image}}" abilities="{{abilities}}"></pokemon-card>
+			        <pokemon-card image="image" abilities="abilities"></pokemon-card>
 			    </div>
 			    <div :if="error">
 			        {{error}}
@@ -35,7 +35,7 @@ const root = new View({
 	tag: 'my-view',
 	data: {
 		pokemonName: '',
-		test: {key: 'value'},
+		test: {key: {dragon: 'I CAN FLY'}},
 		image: null,
 		loading: false,
 		abilities: {
@@ -57,7 +57,7 @@ const root = new View({
 						loading: false,
 						error: null,
 						image: pokemon.sprites.front_default,
-						abilities: toString(pokemon.abilities)
+						abilities: pokemon.abilities
 					});
 				}).catch(e => {
 				this.setState({
