@@ -10,7 +10,10 @@ export default class Node {
 	}
 
 	display() {
-		if (this.astNode.type === 'Text') return this.astNode.content;
+		if (this.astNode.type === 'Text') {
+			console.log(this.astNode.content, this.data);
+			return this.astNode.content;
+		}
 		if (this.children.length > 0) {
 			return h(this.astNode.tagName, {
 				style: this.style,

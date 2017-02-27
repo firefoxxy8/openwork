@@ -1,5 +1,5 @@
 import Directive from './directive';
-import CompiledNode from '../node';
+import Node from '../node';
 
 export default class DirectiveFor extends Directive {
 	constructor(compiledNode) {
@@ -17,7 +17,7 @@ export default class DirectiveFor extends Directive {
 			newChildren = children.concat(newChildren);
 		}
 
-		return new CompiledNode(
+		return new Node(
 			data,
 			this.compiledNode.astNode,
 			this.compiledNode.events,

@@ -1,4 +1,4 @@
-import CompiledNode from '../node';
+import Node from '../node';
 import Directive from './directive';
 export default class DirectiveShow extends Directive{
 
@@ -13,7 +13,7 @@ export default class DirectiveShow extends Directive{
 		if (props[':show']) {
 			style.display = data[props[':show']] ? 'block' : 'none';
 		}
-		return new CompiledNode(this.compiledNode.data,
+		return new Node(this.compiledNode.data,
 			this.compiledNode.astNode,
 			this.compiledNode.events,
 			style,
