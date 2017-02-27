@@ -3,12 +3,6 @@ import Child from './components/child';
 import Subsubchild from './components/subSubChild';
 import Navbar from './components/navbar';
 
-const toString = array => {
-	return array.map(item => {
-		return `Ability : ${item.ability.name} / Slots : ${item.slot}`;
-	}).join(', ');
-};
-
 const root = new View({
 	template: `
 	<div>
@@ -17,6 +11,7 @@ const root = new View({
 		    <h3>Current search : <span class="primary">{{pokemonName}}</span></h3>
 		    <input :model="pokemonName" type="text" placeholder="Tap a pokemon name !"/>
 		    <button @click="onLoadPokemon">Load the pokemon !</button>
+		    <button @click="addItem">Add an item to the array</button>
 		    <p>{{test.key.dragon}}</p>
 		    <div class="m-t">
 		    	<div :for="a of arr">
@@ -46,9 +41,14 @@ const root = new View({
 		abilities: {
 			plouf: 'paf'
 		},
-		arr : [{name: 'toto'}, {name: 'tata'}, {name: 'titi'}]
+		arr: [{name: 'toto'}, {name: 'tata'}, {name: 'titi'}]
 	},
 	methods: {
+		addItem: function () {
+			this.setState({
+				arr: [...this.data.arr, {plouf: 'paf'}]
+			});
+		},
 		onLoadPokemon: function () {
 			this.setState({loading: true, error: null});
 			fetch('https://pokeapi.co/api/v2/pokemon/' + this.data.pokemonName.toLowerCase())

@@ -10,8 +10,9 @@ export default class Node {
 	}
 
 	display() {
+		if (this.astNode.type === 'Text') return this.astNode.content;
 		if (this.children.length > 0) {
-			return h(this.astNode.tagName || this.astNode.type, {
+			return h(this.astNode.tagName, {
 				style: this.style,
 				props: this.props,
 				on: this.events

@@ -1,7 +1,6 @@
 import himalaya from 'himalaya';
 import EventFactory from './eventFactory';
-import StyleFactory from './styleFactory';
-import DirectiveHandler from './directiveHandler';
+import DirectiveHandler from './directives/directiveHandler';
 import interpolate from './interpolate';
 import Node from './node';
 
@@ -19,23 +18,27 @@ class TemplateCompiler {
 	}
 
 	_compileToNode(currentView, astTree) {
-		const vNodes = astTree.map(node => this._computeChildTags(currentView, node));
+		const vNodes = astTree.map(node => this._computeChild(currentView, node));
 		return new Node(currentView.data, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
 	}
 
-	_computeChildTags(currentView, astNode) {
+	_computeChild(currentView, astNode) {
 		const childComponent = this._resolveChildComponent(currentView, astNode);
 		if (childComponent) {
 			return childComponent;
 		}
+		return this._computeChildTags(currentView, astNode);
+	}
+
+	_computeChildTags (currentView, astNode) {
 		const props = astNode.attributes;
 		const events = EventFactory.createFrom(currentView, props);
-
-		const node = new Node(currentView.data, astNode, events, {},  props);
+		let children = [];
+		const node = new Node(currentView.data, astNode, events, {},  props, children);
 		if (astNode.children) {
-			const children = astNode.children.map(node => this._computeChildTags(currentView, node));
-			node.children = children;
+			children = astNode.children.map(node => this._computeChild(currentView, node));
 		}
+		node.children = children;
 		return this.directiveHandler.handle(node);
 	}
 

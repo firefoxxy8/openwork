@@ -1,6 +1,6 @@
-import DirectiveIf from './directives/directiveIf';
-import DirectiveFor from './directives/directiveFor';
-import DirectiveShow from './directives/directiveShow';
+import DirectiveIf from './directiveIf';
+import DirectiveFor from './directiveFor';
+import DirectiveShow from './directiveShow';
 
 export default class DirectiveHandler {
 	handle(compiledNode) {

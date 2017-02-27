@@ -10,7 +10,6 @@ export default class DirectiveFor extends Directive {
 		const valueToCheck = this.compiledNode.props[':for'].split(' ');
 		const keyToIterateOn = valueToCheck[2];
 		const {children, data} = this.compiledNode;
-		console.log(data);
 		const dataLength = data[keyToIterateOn].length;
 		let newChildren = [];
 
