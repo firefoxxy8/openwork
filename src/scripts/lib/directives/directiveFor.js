@@ -1,5 +1,5 @@
 import Directive from './directive';
-import CompiledNode from './../compiledNode';
+import CompiledNode from '../node';
 
 export default class DirectiveFor extends Directive {
 	constructor(compiledNode) {

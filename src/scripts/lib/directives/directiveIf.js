@@ -1,4 +1,4 @@
-import CompiledNode from './../compiledNode';
+import CompiledNode from '../node';
 import Directive from './directive';
 export default class DirectiveIf extends Directive{
 

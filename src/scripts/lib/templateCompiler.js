@@ -3,7 +3,7 @@ import EventFactory from './eventFactory';
 import StyleFactory from './styleFactory';
 import DirectiveHandler from './directiveHandler';
 import interpolate from './interpolate';
-import CompiledNode from './compiledNode';
+import Node from './node';
 
 class TemplateCompiler {
 
@@ -11,15 +11,16 @@ class TemplateCompiler {
 		this.directiveHandler = new DirectiveHandler();
 	}
 
-	compile(currentNode, htmlTemplate, data) {
-		const htmlInterpolated = interpolate(htmlTemplate, data);
+	compile(currentNode) {
+		const {template, data} = currentNode;
+		const htmlInterpolated = interpolate(template, data);
 		const ast = himalaya.parse(htmlInterpolated);
 		return this._compileToNode(currentNode, ast);
 	}
 
 	_compileToNode(currentView, astTree) {
 		const vNodes = astTree.map(node => this._computeChildTags(currentView, node));
-		return new CompiledNode(currentView, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
+		return new Node(currentView, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
 	}
 
 	_computeChildTags(currentView, astNode) {
@@ -43,7 +44,7 @@ class TemplateCompiler {
 		const compiledElements = componentsAvailable.map(component => {
 			const parentProps = this._computeParentProperties(parentComponent.data, node.attributes);
 			component.data = Object.assign({}, component.data, node.attributes, parentProps);
-			const compiledNode = this.compile(component, component.template, component.data);
+			const compiledNode = this.compile(component);
 			component.currentNode = compiledNode;
 			return compiledNode;
 		});

@@ -23,7 +23,7 @@ export default class View {
 	}
 
 	_updateNode(oldNode) {
-		const node = templateCompiler.compile(this, this.template, this.data);
+		const node = templateCompiler.compile(this);
 		this.currentNode = node;
 		patch(oldNode, this.currentNode);
 	}
