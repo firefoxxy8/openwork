@@ -8,10 +8,10 @@ export default class DirectiveIf extends Directive{
 
 	apply() {
 		const valueToCheck = this.compiledNode.props[':if'];
-		const valueInData = this.compiledNode.currentView.data[valueToCheck];
+		const valueInData = this.compiledNode.data[valueToCheck];
 		if (valueInData) {
 			return new CompiledNode(
-				this.compiledNode.currentView,
+				this.compiledNode.data,
 				this.compiledNode.astNode,
 				this.compiledNode.events,
 				this.compiledNode.style,
@@ -21,9 +21,9 @@ export default class DirectiveIf extends Directive{
 		}
 		if (valueToCheck[0] === '!') {
 			const negativeValueToCheck = valueToCheck.substr(1);
-			if (!this.compiledNode.currentView.data[negativeValueToCheck]) {
+			if (!this.compiledNode.data[negativeValueToCheck]) {
 				return new CompiledNode(
-					this.compiledNode.currentView,
+					this.compiledNode.data,
 					this.compiledNode.astNode,
 					this.compiledNode.events,
 					this.compiledNode.style,

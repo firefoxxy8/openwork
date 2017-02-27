@@ -1,7 +1,7 @@
 import h from 'snabbdom/h';
-export default class CompiledNode {
-	constructor(currentView, astNode = {type: 'div', content: ''}, events = {}, style = {}, props = {}, children = []) {
-		this.currentView = currentView;
+export default class Node {
+	constructor(data = {}, astNode = {type: 'div', content: ''}, events = {}, style = {}, props = {}, children = []) {
+		this.data = data;
 		this.astNode = astNode;
 		this.events = events;
 		this.style = style;

@@ -31,7 +31,7 @@ const root = new View({
 				<div :if="image">
 			        <pokemon-card image="image" abilities="abilities"></pokemon-card>
 			    </div>
-			    <div :if="error">
+			    <div :show="error">
 			        {{error}}
 				</div>
 			</div>

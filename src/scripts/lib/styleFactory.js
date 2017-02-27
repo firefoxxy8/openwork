@@ -1,8 +1,8 @@
 export default class StyleFactory {
-	static createFrom(viewInstance, attributes = {}) {
+	static createFrom(data = {}, attributes = {}) {
 		const style = {};
 		if (attributes[':show']) {
-			style.display = viewInstance.data[attributes[':show']] ? 'block' : 'none';
+			style.display = data[attributes[':show']] ? 'block' : 'none';
 		}
 		return style;
 	}

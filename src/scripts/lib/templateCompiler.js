@@ -14,13 +14,13 @@ class TemplateCompiler {
 	compile(currentNode) {
 		const {template, data} = currentNode;
 		const htmlInterpolated = interpolate(template, data);
-		const ast = himalaya.parse(htmlInterpolated);
-		return this._compileToNode(currentNode, ast);
+		const astTree = himalaya.parse(htmlInterpolated);
+		return this._compileToNode(currentNode, astTree);
 	}
 
 	_compileToNode(currentView, astTree) {
 		const vNodes = astTree.map(node => this._computeChildTags(currentView, node));
-		return new Node(currentView, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
+		return new Node(currentView.data, {tagName: currentView.tag}, {}, {}, {}, vNodes).display();
 	}
 
 	_computeChildTags(currentView, astNode) {
@@ -30,13 +30,15 @@ class TemplateCompiler {
 		}
 		const props = astNode.attributes;
 		const events = EventFactory.createFrom(currentView, props);
-		const style = StyleFactory.createFrom(currentView, props);
+		const style = StyleFactory.createFrom(currentView.data, props);
+
+		const node = new Node(currentView.data, astNode, events, style,  props);
 
 		if (astNode.children) {
 			const children = astNode.children.map(node => this._computeChildTags(currentView, node));
-			return this.directiveHandler.handle(currentView, astNode, events, style,  props, children);
+			node.children = children;
 		}
-		return this.directiveHandler.handle(currentView, astNode, events, style,  props);
+		return this.directiveHandler.handle(node);
 	}
 
 	_resolveChildComponent(parentComponent, node) {
