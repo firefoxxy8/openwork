@@ -1,5 +1,6 @@
 import DirectiveIf from './directives/directiveIf';
 import DirectiveFor from './directives/directiveFor';
+import DirectiveShow from './directives/directiveShow';
 
 export default class DirectiveHandler {
 	handle(compiledNode) {
@@ -9,6 +10,9 @@ export default class DirectiveHandler {
 		}
 		if (props[':for']) {
 			compiledNode = new DirectiveFor(compiledNode).apply();
+		}
+		if (props[':show']) {
+			compiledNode = new DirectiveShow(compiledNode).apply();
 		}
 		return compiledNode.display();
 	}

@@ -30,10 +30,8 @@ class TemplateCompiler {
 		}
 		const props = astNode.attributes;
 		const events = EventFactory.createFrom(currentView, props);
-		const style = StyleFactory.createFrom(currentView.data, props);
 
-		const node = new Node(currentView.data, astNode, events, style,  props);
-
+		const node = new Node(currentView.data, astNode, events, {},  props);
 		if (astNode.children) {
 			const children = astNode.children.map(node => this._computeChildTags(currentView, node));
 			node.children = children;
