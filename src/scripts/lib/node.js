@@ -10,13 +10,12 @@ export default class Node {
 		this.style = style;
 		this.props = props;
 		this.children = children;
+		if (data.a) {
+			console.log(this);
+		}
 	}
 
 	display() {
-		if (this.astNode.type === 'Text') {
-			this.astNode.content = interpolate(this.astNode.content, this.data);
-			return this.astNode.content;
-		}
 		if (this.children.length > 0) {
 			return h(this.astNode.tagName, {
 				style: this.style,
@@ -24,17 +23,23 @@ export default class Node {
 				on: this.events
 			}, this.children.map(child => child.sel ? child : child.display()));
 		}
+		const interpolated = interpolate(this.astNode.content, this.data);
+
+		if (this.astNode.type === 'Text') {
+			this.astNode.content = interpolated;
+			return this.astNode.content;
+		}
 		return h(this.astNode.tagName || this.astNode.type, {
 			style: this.style,
 			props: this._interpolateProps(this.props),
 			on: this.events
-		}, interpolate(this.astNode.content, this.data));
+		}, interpolated);
 	}
 
 	_interpolateProps(props) {
 		const newProps = Object.assign({}, props);
-		if (this.astNode.tagName === 'img') {
-			for (let k in props) {
+		for (let k in props) {
+			if (typeof props[k] === 'string') {
 				newProps[k] = interpolate(props[k], this.data);
 			}
 		}
