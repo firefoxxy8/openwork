@@ -5,6 +5,14 @@ import View from '../lib/view';
 import {pokemonService} from './../services/pokemonService';
 import {PokemonDetails} from './pokemonDetails';
 
+const loadAbilities = abilities => {
+	return abilities.map(ability => `${ability.ability.name} : Slot max ${ability.slot}`).join (' | ');
+};
+
+const loadStats = stats => {
+	return stats.map(stat => `${stat.stat.name} : Base stat ${stat.base_stat}`).join (' | ');
+};
+
 export const PokemonCard = new View({
 	template: `
 		<aside>
@@ -147,7 +155,7 @@ export const PokemonCard = new View({
 				<option>Porygon</option>
 				<option>Omanyte</option>
 				<option>Omastar</option>
-				<option>Kabuto (Dome)</option>
+				<option>Kabuto</option>
 				<option>Kabutops</option>
 				<option>Aerodactyl</option>
 				<option>Snorlax</option>
@@ -160,14 +168,16 @@ export const PokemonCard = new View({
 				<option>Mewtwo</option>
 				<option>Mew</option>
 			</select>
-			<div :if="loading">
-				Loading...
+			<div :if="loading" class="text-center">
+				<img src="https://media.giphy.com/media/vXa1ndiG1liU0/source.gif" class="loading-size"/>
 			</div>
 			<div :if="error">
 				{{error}}
 			</div>
-			<div :if="currentPokemon">
-				<pokemon-details pokemon="currentPokemon"></pokemon-details>
+			<div :if="!loading">
+				<div :if="currentPokemon">
+					<pokemon-details pokemon="currentPokemon" abilities="abilities" stats="stats"></pokemon-details>
+				</div>
 			</div>
 		</aside>
 	`,
@@ -205,7 +215,9 @@ export const PokemonCard = new View({
 					this.setState({
 						loading: false,
 						currentPokemon,
-						error: null
+						error: null,
+						abilities: loadAbilities(currentPokemon.abilities),
+						stats: loadStats(currentPokemon.stats)
 					});
 				})
 				.catch(() => {

@@ -1,15 +1,19 @@
 import View from '../lib/view';
+import {PokemonSprites} from './pokemonSprites';
+import {PokemonStats} from './pokemonStats';
 
 export const PokemonDetails = new View({
 	template: `
-		<section>
-			{{pokemon.name}}
+		<section class="pokemon-details">
+			<h1>{{pokemon.name}}</h1>
+			<pokemon-sprites pokemon="pokemon"></pokemon-sprites>
+			<pokemon-stats stats="abilities" title="Abilities"></pokemon-stats>
+			<pokemon-stats stats="stats" title="Stats"></pokemon-stats>
 		</section>
 	`,
 	tag: 'pokemon-details',
-	methods: {
-		tellMe: function() {
-			console.log(this.data);
-		}
-	}
+	components: [
+		PokemonSprites,
+		PokemonStats
+	]
 });

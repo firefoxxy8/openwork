@@ -57,8 +57,8 @@ class TemplateCompiler {
 
 	_computeParentProperties(parentProperties, nodeAttributes) {
 		const parentProps = {};
-		for (let key in parentProperties) {
-			for (let k in nodeAttributes) {
+		for (let k in nodeAttributes) {
+			for (let key in parentProperties) {
 				if (nodeAttributes[k] === key) {
 					parentProps[k] = parentProperties[key];
 				}
