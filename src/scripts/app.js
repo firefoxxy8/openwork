@@ -1,6 +1,7 @@
 import View from './lib/view';
 import {Navbar} from './components/navbar';
 import {PokemonCard} from './components/pokemonCard';
+import {Explanation} from './components/explanation';
 
 const root = new View({
 	template: `
@@ -8,6 +9,9 @@ const root = new View({
 		<navbar></navbar>
 		<div class="container">
 			<div class="row">
+				<div class="col-md-6">
+					<explanation></explanation>
+				</div>
 				<div class="col-md-6">
 					<pokemon-card></pokemon-card>
 				</div>
@@ -21,7 +25,8 @@ const root = new View({
 	},
 	components: [
 		Navbar,
-		PokemonCard
+		PokemonCard,
+		Explanation
 	]
 });
 root.mount('application');

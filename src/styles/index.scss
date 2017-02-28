@@ -3,6 +3,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-size: 12px;
+	color: #666666;
 }
 
 h1 {
@@ -18,9 +19,10 @@ h3 {
 	font-size: 1.4em;
 }
 
-.pokemon-details {
+.box {
 	padding: 10px;
 	background-color: #f8f8f8;
+	border-bottom: 1px solid #dfdfdf;
 }
 
 .text-content {
@@ -106,4 +108,17 @@ h3 {
 
 .fairy {
 	color: #D685AD;
+}
+
+.social-icon {
+	margin-top: 10px;
+	height: 30px;
+}
+
+.social-icon:hover {
+	opacity: 0.7;
+}
+
+.error {
+	color: red;
 }

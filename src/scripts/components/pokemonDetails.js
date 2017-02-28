@@ -4,7 +4,7 @@ import {PokemonStats} from './pokemonStats';
 
 export const PokemonDetails = new View({
 	template: `
-		<section class="pokemon-details">
+		<section class="box">
 			<h1 class="{{types}}">{{pokemon.name}}</h1>
 			<pokemon-sprites pokemon="pokemon"></pokemon-sprites>
 			<pokemon-stats stats="abilities" title="Abilities"></pokemon-stats>

@@ -9,9 +9,6 @@ It's based on knowledge provided by the community.
 
 [Click here to check the demo, and enter a pokemon name in the search bar](https://skahrz.github.io/openwork/)
 
-![Gif](https://media.giphy.com/media/3o84U1gcw1ae2219XW/source.gif)
-
-
 ### What's inside ?
 
 - [React style change detection using `setState`](https://facebook.github.io/react/docs/state-and-lifecycle.html)
