@@ -13,6 +13,10 @@ const loadStats = stats => {
 	return stats.map(stat => `${stat.stat.name} : Base stat ${stat.base_stat}`).join (' | ');
 };
 
+const manageClasses = types => {
+	return types.map(type => type.type.name)[0];
+};
+
 export const PokemonCard = new View({
 	template: `
 		<aside>
@@ -176,7 +180,7 @@ export const PokemonCard = new View({
 			</div>
 			<div :if="!loading">
 				<div :if="currentPokemon">
-					<pokemon-details pokemon="currentPokemon" abilities="abilities" stats="stats"></pokemon-details>
+					<pokemon-details types="types" pokemon="currentPokemon" abilities="abilities" stats="stats"></pokemon-details>
 				</div>
 			</div>
 		</aside>
@@ -217,7 +221,8 @@ export const PokemonCard = new View({
 						currentPokemon,
 						error: null,
 						abilities: loadAbilities(currentPokemon.abilities),
-						stats: loadStats(currentPokemon.stats)
+						stats: loadStats(currentPokemon.stats),
+						types: manageClasses(currentPokemon.types)
 					});
 				})
 				.catch(() => {
