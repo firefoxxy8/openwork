@@ -60,7 +60,7 @@ class TemplateCompiler {
 		for (let key in parentProperties) {
 			for (let k in nodeAttributes) {
 				if (nodeAttributes[k] === key) {
-					parentProps[key] = parentProperties[key];
+					parentProps[k] = parentProperties[key];
 				}
 			}
 		}

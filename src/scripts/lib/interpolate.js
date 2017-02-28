@@ -3,7 +3,7 @@ const matchingFunction = data => (val, match) => {
 	if (matchedData) {
 		return data[match];
 	}
-	const result = match.split('.').reduce((o, i) => o[i], data);
+	const result = match.split('.').reduce((o, i) => o ? o[i] : i, data);
 	return result;
 };
 
