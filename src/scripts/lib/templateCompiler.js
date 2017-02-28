@@ -1,7 +1,6 @@
 import himalaya from 'himalaya';
 import EventFactory from './eventFactory';
 import DirectiveHandler from './directives/directiveHandler';
-import interpolate from './interpolate';
 import Node from './node';
 
 class TemplateCompiler {
@@ -11,9 +10,8 @@ class TemplateCompiler {
 	}
 
 	compile(currentNode) {
-		const {template, data} = currentNode;
-		const htmlInterpolated = interpolate(template, data);
-		const astTree = himalaya.parse(htmlInterpolated);
+		const {template} = currentNode;
+		const astTree = himalaya.parse(template);
 		return this._compileToNode(currentNode, astTree);
 	}
 
@@ -34,12 +32,12 @@ class TemplateCompiler {
 		const props = astNode.attributes;
 		const events = EventFactory.createFrom(currentView, props);
 		let children = [];
-		const node = new Node(currentView.data, astNode, events, {},  props, children);
+		const nodeCompiled = new Node(currentView.data, astNode, events, {},  props, children);
 		if (astNode.children) {
 			children = astNode.children.map(node => this._computeChild(currentView, node));
 		}
-		node.children = children;
-		return this.directiveHandler.handle(node);
+		nodeCompiled.children = children;
+		return this.directiveHandler.handle(nodeCompiled);
 	}
 
 	_resolveChildComponent(parentComponent, node) {

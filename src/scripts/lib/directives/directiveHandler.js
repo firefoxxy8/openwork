@@ -14,6 +14,6 @@ export default class DirectiveHandler {
 		if (props[':show']) {
 			compiledNode = new DirectiveShow(compiledNode).apply();
 		}
-		return compiledNode.display();
+		return compiledNode;
 	}
 }

@@ -61,8 +61,7 @@ const root = new View({
 					this.setState({
 						loading: false,
 						error: null,
-						image: pokemon.sprites.front_default,
-						abilities: pokemon.abilities
+						image: pokemon.sprites.front_default
 					});
 				}).catch(e => {
 				this.setState({

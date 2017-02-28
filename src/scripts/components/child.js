@@ -7,10 +7,10 @@ export default new View({
 			<div class="global-padding">
 			    <img src="{{image}}"/>
 			    <p>
-			        {{abilities}}
+			        {{abilities.plouf}}
 				</p>
 				<button @click="showAbilitied">Abilities</button>
-			    <subchild image="{{image}}"></subchild>
+			    <subchild image="image"></subchild>
 		    </div>
 	    </div>
 	`,

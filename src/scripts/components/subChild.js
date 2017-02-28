@@ -5,7 +5,7 @@ export default new View({
 	template: `
 		<div class="subchild">
 			<span>Subchild niveau 2</span>
-			<subsubchild image="{{image}}"></subsubchild>
+			<subsubchild image="image"></subsubchild>
 		</div>
 	`,
 	tag: 'subchild',
