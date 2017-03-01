@@ -9,11 +9,11 @@ const root = new View({
 		<navbar></navbar>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<explanation></explanation>
-				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 col-sm-12 m-b">
 					<pokemon-card></pokemon-card>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<explanation></explanation>
 				</div>
 			</div>
 		</div>
